@@ -422,6 +422,11 @@ export class CodexMessageAdapter {
       instructions,
       store: false,
       stream,
+      // The Codex backend runs with store: false, so reasoning context can only
+      // be carried across turns via encrypted content. Requesting it (and
+      // matching the Codex CLI defaults below) is required to avoid 400 errors.
+      include: ['reasoning.encrypted_content'],
+      parallel_tool_calls: false,
       tools,
       tool_choice: normalizeToolChoice(request.tool_choice),
       ...(reasoning && {
