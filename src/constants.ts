@@ -325,8 +325,8 @@ export const DEFAULT_CHAT_MODELS: readonly ChatModel[] = [
   {
     providerType: 'openai-plan',
     providerId: PROVIDER_TYPES_INFO['openai-plan'].defaultProviderId,
-    id: 'gpt-5.2 (plan)',
-    model: 'gpt-5.2',
+    id: 'gpt-5.5 (plan)',
+    model: 'gpt-5.5',
   },
   {
     providerType: 'gemini-plan',
