@@ -1,5 +1,6 @@
 import { Reasoning, ReasoningEffort } from 'openai/resources/shared'
 
+import { CODEX_ORIGINATOR } from '../../constants'
 import { ChatModel } from '../../types/chat-model.types'
 import {
   LLMOptions,
@@ -118,12 +119,19 @@ export class OpenAICodexProvider extends BaseLLMProvider<
       }
     }
 
+    // The ChatGPT Codex backend (backend-api/codex/responses) validates that the
+    // request originates from the Codex CLI. Without these headers it rejects the
+    // request with a 400, even when the OAuth token is valid.
     const headers: Record<string, string> = {
       authorization: `Bearer ${this.provider.oauth.accessToken}`,
+      'OpenAI-Beta': 'responses=experimental',
+      originator: CODEX_ORIGINATOR,
+      session_id: crypto.randomUUID(),
+      accept: 'text/event-stream',
     }
 
     if (this.provider.oauth.accountId) {
-      headers['ChatGPT-Account-Id'] = this.provider.oauth.accountId
+      headers['chatgpt-account-id'] = this.provider.oauth.accountId
     }
 
     return headers

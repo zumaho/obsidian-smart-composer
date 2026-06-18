@@ -14,6 +14,9 @@ export const CODEX_REDIRECT_URI = `http://localhost:${CODEX_REDIRECT_PORT}/auth/
 export const CODEX_AUTH_CLAIMS_URL = 'https://api.openai.com/auth'
 export const CODEX_RESPONSES_ENDPOINT =
   'https://chatgpt.com/backend-api/codex/responses'
+// The ChatGPT Codex backend only accepts requests that look like the official
+// Codex CLI. Sending a different originator (or omitting it) results in a 400.
+export const CODEX_ORIGINATOR = 'codex_cli_rs'
 
 export const CLAUDE_CODE_CLIENT_ID = '9d1c250a-e61b-44d9-88ed-5944d1962f5e'
 export const CLAUDE_CODE_AUTHORIZE_BASE_URL = 'https://claude.ai'
